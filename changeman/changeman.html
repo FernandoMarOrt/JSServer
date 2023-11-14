@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol id="lista">
+        <li>Perico</li>
+        <li>Juanico</li>
+        <ul>
+            <li>Jose</li>
+            <ul>
+                <li>Roman</li>
+                <li>Marco</li>
+                <li>Rodrigo</li>
+            </ul>
+            <li>Jose</li>
+
+            <li>Lorenzo</li>
+            <ul>
+                <li>Dimas</li>
+                <li>Gestas</li>
+                <li>Malakatos</li>
+                <li>Jose</li>
+            </ul>
+        </ul>
+        <li>Sofoclis</li>
+    </ol>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+                let objJSON = this.responseText; //Te trae los datos
+                //console.log(objJSON); //imprime los daots
+                objJSON= JSON.parse(objJSON);
+                objJSON.map(e=>console.log(e))
+                changeMan(document.getElementById("lista"),e.NOMBREI,e.NOMBREF)
+            }
+        };
+        xhttp.open("GET", "data.json", true);
+        xhttp.send();
+
+
+        const changeMan = (node,man1,man2) =>{
+            if(nodo.innerHTML.toUpperCase()== man1.toUpperCase()){
+                node.innerHTML = man2 //Esto seria cambia el nodo a man2
+                for (let i = 0; i < node.children.length; i++) {
+                    changeMan(nodo.children[i],man1,man2)
+                    
+                }
+            }
+        }
+        changeMan(document.getElementById("lista"),"SOFOCLIS","ARISTIDES")
+    </script>
+</body>
+</html>

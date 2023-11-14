@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function verifica() {
+            let usuario = document.getElementById('usuario').value;
+            let clave = document.getElementById('clave').value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("respuesta").innerHTML = this.responseText;
+                }
+            };
+
+            xhttp.open("GET", "https://localhost/Proyectos/JavaScript/Ejercicios/verificar.php?usuario=" + usuario + "&clave=" + clave, true);
+            xhttp.send();
+        }
+    </script>
+
+    <form>
+        <p>
+            <label>Introduzca usuario y passwd:</label>
+        </p>
+
+        <p>
+            <input type="text" name="usuario" id="usuario" placeholder="usuario" value=""><br />
+            <input type="text" name="clave" id="clave" placeholder="password" value=""><br />
+            <button type="button" onclick="verifica()">Log In</button>
+            <p>
+                <span id="respuesta"></span>
+            </p>
+        </p>
+    </form>
+</body>
+
+</html>
