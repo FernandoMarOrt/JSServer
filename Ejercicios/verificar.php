@@ -1,21 +1,14 @@
 <?php
-$param1 = $_REQUEST["usuario"];
-$param2 = $_REQUEST["clave"];
+$parametro1=$_REQUEST["nombre"];
+$parametro2=$_REQUEST["clave"];
 
+$respuesta= "";
 
-$param1 = strtolower($param1);
+    if($parametro1 == "Admin" && $parametro2 == "1234"){
+        $respuesta=  "Usuario valido";
+    }else{
+        $respuesta=  "Usuario no valido";
+    }
 
-
-$respuesta = "";
-
-
-if ($param1 !== "admin" || $param2 !== "1234") {
-
-    $respuesta = "USUARIO NO VALIDO";
-} else {
-    $respuesta = "USUARIO VALIDO";
-}
-
-
-echo $respuesta ;
+echo $respuesta;
 ?>

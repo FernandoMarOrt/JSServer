@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button type="button" onclick="generar()">Generar</button>
+    <ul id="reyesgodos"></ul>
+
+    <script>
+        const generar = () => {
+            let obj = document.getElementById("reyesgodos");
+            var xmlhttp = new XMLHttpRequest();
+            var url = "reyesgodos.php";
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                let objJSON = this.responseText; //Contenido del fichero
+                objJSON = JSON.parse(objJSON); //Lo parseo a json
+                let arrayReyesGodos = Object.values(objJSON);
+                visualiza(arrayReyesGodos, obj);
+            }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+
+        let visualiza = (arr, obj) => {
+            arr.map(e => {
+                if (Array.isArray(e)) {
+                    let newobj = document.createElement("ul");
+                    obj.appendChild(newobj)
+                    visualiza(e, newobj)
+                } else {
+                    let nodo = document.createElement("li");
+                    let texto = document.createTextNode(e.nombre || e);
+                    nodo.appendChild(texto);
+                    obj.appendChild(nodo);
+                    if (e.hijos) {
+                        let newobj = document.createElement("ul");
+                        obj.appendChild(newobj)
+                        visualiza(e.hijos, newobj)
+                    }
+                }
+            })
+        }
+        
+    </script>
+</body>
+
+</html>

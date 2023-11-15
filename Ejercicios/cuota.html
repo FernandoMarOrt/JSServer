@@ -1,0 +1,47 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const valida = () => {
+            let capital = document.getElementById('capital').value;
+            let interes = document.getElementById('interes').value;
+            let plazo = document.getElementById('plazo').value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("respuesta").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "http://localhost/Proyectos/JavaScript/Ejercicios/cuota.php?capital=" + capital + "&interes=" + interes + "&plazo=" + plazo, true);
+            xmlhttp.send();
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <form>
+        <p>
+            <label>Calculo de la cuota de un prestamo</label>
+        </p>
+
+        <p>
+            <input type="number" name="capital" id="capital" placeholder="capital solicitado" value=""><br />
+            <input type="number" name="interes" id="interes" placeholder="interes anual" value=""><br />
+            <input type="number" name="plazo" id="plazo" placeholder="plazo (meses)" value=""><br />
+            <button type="button" onclick="valida()">Calcular</button>
+        <p>
+            <span id="respuesta"></span>
+        </p>
+        </p>
+    </form>
+
+</body>
+
+</html>
