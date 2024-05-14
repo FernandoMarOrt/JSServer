@@ -8,15 +8,15 @@ $_POST = json_decode(file_get_contents("php://input"), true);
 
 require 'funciones.php';
 
-if (isset($_POST['id_peluquero'], $_POST['id_dia'], $_POST['hora'], $_POST['estado'])) {
+if (isset($_POST['id_peluquero'], $_POST['id_dia'], $_POST['hora'], $_POST['estado'], $_POST['mes'])) {
     $id_peluquero = $_POST['id_peluquero'];
-    $id_dia = $_POST['id_dia']; // Corregir nombre de la variable
+    $id_dia = $_POST['id_dia'];
     $hora = $_POST['hora'];
     $estado = $_POST["estado"];
+    $mes = $_POST['mes']; // Agregar el mes recibido
 
     try {
-        // Consulta de inserción con sentencia preparada
-        $consulta = "INSERT INTO FERNANDO_reservas (id_peluquero, id_dias, hora, estado, nombre, telefono) VALUES ('$id_peluquero','$id_dia','$hora','$estado','','')";
+        $consulta = "INSERT INTO FERNANDO_reservas (id_peluquero, id_dias, hora, estado, nombre, telefono, mes) VALUES ('$id_peluquero','$id_dia','$hora','$estado','','','$mes')"; // Incluir el mes en la consulta SQL
         $sentencia = $conexion->prepare($consulta);
         $sentencia->execute();
         $respuesta["mensaje"] = "Reserva insertada correctamente";
